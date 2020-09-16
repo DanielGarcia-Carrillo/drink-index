@@ -62,7 +62,7 @@ function denormalize(json, origin, prevResult = {}) {
   return result;
 }
 
-function readAndCombine() {
+function readAndCombine(options) {
   const fs = require('fs');
 
   const data = [
@@ -71,9 +71,9 @@ function readAndCombine() {
   ].reduce((acc, [json, origin]) => denormalize(json, origin, acc), {});
 
   fs.writeFileSync(
-    '../data/json/denormalized-combined.json',
+    `../data/json/denormalized-combined-${options.version}.json`,
     JSON.stringify(data, null, 2)
   );
 }
 
-readAndCombine();
+readAndCombine({ version: 1 });

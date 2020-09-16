@@ -1,0 +1,13 @@
+.ingredient-search {
+  max-width: 100%;
+  width: 240px;
+}
+
+#chip-list {
+  min-height: 40px;
+  margin: 20px 0;
+}
+
+button.filter {
+  margin-right: 20px;
+}
