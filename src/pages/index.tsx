@@ -86,13 +86,17 @@ export default function IndexPage() {
         {availableSpecs.map(spec => (
           <Card>
             <CardContent className="spec">
+              <h3>{spec.name}</h3>
               <p className="secondary origin">
                 {spec.origin} - {spec.pageNum}
               </p>
-              <h3>{spec.name}</h3>
               <ul>
                 {spec.ingredients.map(i => (
-                  <li className={`secondary ${i.missing ? 'missing' : ''}`}>
+                  <li
+                    className={`secondary list-item ${
+                      i.missing ? 'missing' : ''
+                    }`}
+                  >
                     {i.ingredient}
                   </li>
                 ))}

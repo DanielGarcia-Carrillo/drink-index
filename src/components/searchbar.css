@@ -1,11 +1,16 @@
 .ingredient-search {
   max-width: 100%;
   width: 240px;
+  background-color: white;
 }
 
 #chip-list {
   min-height: 40px;
   margin: 20px 0;
+}
+
+#chip-list .chip {
+  background-color: white;
 }
 
 button.filter {

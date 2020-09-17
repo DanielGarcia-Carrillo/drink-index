@@ -65,16 +65,21 @@ export default function Searchbar({ ingredients, onSearch }: Props) {
             value &&
             !ingredientsSelected.includes(value)
           ) {
-            setSelected([...ingredientsSelected, value]);
+            setSelected([...ingredientsSelected, value].sort());
           }
         }}
         renderInput={params => (
-          <TextField {...params} label="Ingredients" variant="outlined" />
+          <TextField
+            {...params}
+            label="What's in your bar?"
+            variant="outlined"
+          />
         )}
       />
       <div id="chip-list">
         {ingredientsSelected.map(i => (
           <Chip
+            className="chip"
             variant="outlined"
             label={i}
             onDelete={() => {
