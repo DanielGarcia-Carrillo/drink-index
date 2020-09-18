@@ -77,3 +77,44 @@ function readAndCombine(options) {
 }
 
 readAndCombine({ version: 1 });
+
+// Extracting ingredients into separate list and eyeballing corrupted data
+// ingredients = require('./ingredients-0.json');
+// deduped = {};
+// corruptValues = [];
+// Object.values(ingredients).forEach(([canonical, ...list]) => {
+//   deduped[canonical.ingredient] = canonical;
+//   list.forEach(i => {
+//     if (
+//       ['ingredientCategory', 'rumCategory', 'isInfusion'].some(
+//         field => (i[field] || '') !== (canonical[field] || '')
+//       )
+//     ) {
+//       corruptValues.push(i);
+//     }
+//   });
+// });
+
+// Object.values(deduped)
+//   .sort(({ ingredient: a }, { ingredient: b }) => a.localeCompare(b))
+//   .map(
+//     ({ index, ingredient, ingredientCategory, rumCategory, ...rest }, id) => ({
+//       ...rest,
+//       rumCategory: rumCategory ? Number(rumCategory) : null,
+//       id: id + 1,
+//       name: ingredient,
+//       category: ingredientCategory,
+//     })
+//   );
+
+// Normalizing spec data with ingredient list
+// Object.values(specs).flat().forEach(s => {
+//     s.ingredients = s.ingredients.map(i => {
+//       const mapped = ingredientsMap[i.ingredient];
+//       if (mapped) {
+//         console.log(JSON.stringify(mapped, null, ''))
+//         return { ingredientId: mapped.id };
+//       }
+//       return i;
+//     });
+//   });
