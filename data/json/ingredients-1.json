@@ -375,14 +375,14 @@
     "rumCategory": null,
     "id": 54,
     "name": "Becherovka",
-    "category": "Other (Becherovka)"
+    "category": "Amaro (Becherovka)"
   },
   {
     "isInfusion": false,
     "rumCategory": null,
     "id": 55,
     "name": "Becherovka Bitters",
-    "category": "Bitters (Becherovka)"
+    "category": "Amaro (Becherovka)"
   },
   {
     "isInfusion": false,
@@ -464,22 +464,8 @@
   {
     "isInfusion": false,
     "rumCategory": null,
-    "id": 67,
-    "name": "Bittermens 'Elemakule Tiki Bitters",
-    "category": "Bitters (Tiki)"
-  },
-  {
-    "isInfusion": false,
-    "rumCategory": null,
-    "id": 68,
-    "name": "Bittermens ‘Elemakule Tiki Bitters",
-    "category": "Bitters (Tiki)"
-  },
-  {
-    "isInfusion": false,
-    "rumCategory": null,
     "id": 69,
-    "name": "Bittermens ’Elemakule Tiki Bitters",
+    "name": "Bittermens 'Elemakule Tiki Bitters",
     "category": "Bitters (Tiki)"
   },
   {
@@ -515,14 +501,14 @@
     "rumCategory": null,
     "id": 74,
     "name": "Bittermens Xocolatl (Chocolate) Mole Bitters",
-    "category": "Bitters (Chocolate)"
+    "category": "Bitters (Mole)"
   },
   {
     "isInfusion": false,
     "rumCategory": null,
     "id": 75,
     "name": "Bittermens Xocolatl Mole Bitters",
-    "category": "Bitters (Chocolate)"
+    "category": "Bitters (Mole)"
   },
   {
     "isInfusion": false,
@@ -648,7 +634,7 @@
     "rumCategory": null,
     "id": 93,
     "name": "Boiling Water",
-    "category": "Water Boiling"
+    "category": "Water"
   },
   {
     "isInfusion": false,
@@ -732,14 +718,14 @@
     "rumCategory": null,
     "id": 105,
     "name": "Broker's Gin",
-    "category": "Gin (Broker's)"
+    "category": "Gin (London Dry)"
   },
   {
     "isInfusion": false,
     "rumCategory": null,
     "id": 106,
     "name": "Bruichladdich Botanist Gin",
-    "category": "Gin"
+    "category": "Gin (Islay Dry)"
   },
   {
     "isInfusion": false,
@@ -963,7 +949,7 @@
     "rumCategory": null,
     "id": 138,
     "name": "Cherry Heering",
-    "category": "Cherry Heering"
+    "category": "Liqueur (Cherry Heering)"
   },
   {
     "isInfusion": false,
@@ -991,7 +977,7 @@
     "rumCategory": null,
     "id": 142,
     "name": "Cilantro Sprig",
-    "category": "Other (Cilantro)"
+    "category": "Leaf (Cilantro)"
   },
   {
     "isInfusion": false,
@@ -1440,13 +1426,6 @@
     "id": 206,
     "name": "Earl Grey–Infused Dolin Blanc Vermouth",
     "category": "Vermouth (Blanc)"
-  },
-  {
-    "isInfusion": false,
-    "rumCategory": null,
-    "id": 207,
-    "name": "East India Solera Sherry",
-    "category": "Sherry"
   },
   {
     "isInfusion": false,
@@ -1962,13 +1941,6 @@
   {
     "isInfusion": false,
     "rumCategory": null,
-    "id": 281,
-    "name": "Heavy Whipping Cream",
-    "category": "Cream (Heavy)"
-  },
-  {
-    "isInfusion": false,
-    "rumCategory": null,
     "id": 282,
     "name": "Hellfire Tincture",
     "category": "Hellfire Tincture"
@@ -2076,13 +2048,6 @@
     "rumCategory": null,
     "id": 297,
     "name": "Jalapeño-Infused Siembra Azul Blanco Tequila",
-    "category": "Agave (Tequila Blanco)"
-  },
-  {
-    "isInfusion": true,
-    "rumCategory": null,
-    "id": 298,
-    "name": "Jalapeño–Infused Siembra Azul Blanco Tequila",
     "category": "Agave (Tequila Blanco)"
   },
   {
@@ -2284,13 +2249,6 @@
   {
     "isInfusion": false,
     "rumCategory": null,
-    "id": 327,
-    "name": "Lemon Twists",
-    "category": "Twist (Lemon)"
-  },
-  {
-    "isInfusion": false,
-    "rumCategory": null,
     "id": 328,
     "name": "Leopold Brothers Rocky Mountain Blackberry Liqueur",
     "category": "Liqueur (Blackberry)"
@@ -2314,13 +2272,6 @@
     "rumCategory": null,
     "id": 331,
     "name": "Licor 43",
-    "category": "Liqueur (Licor 43)"
-  },
-  {
-    "isInfusion": false,
-    "rumCategory": null,
-    "id": 332,
-    "name": "Licor 43 Spiced Liqueur",
     "category": "Liqueur (Licor 43)"
   },
   {
@@ -2362,7 +2313,7 @@
     "isInfusion": false,
     "rumCategory": null,
     "id": 338,
-    "name": "Lime Small Rounded Chunk",
+    "name": "Lime Coin",
     "category": "Fruit (Lime)"
   },
   {
@@ -2370,13 +2321,6 @@
     "rumCategory": null,
     "id": 339,
     "name": "Lime Wedge",
-    "category": "Fruit (Lime)"
-  },
-  {
-    "isInfusion": false,
-    "rumCategory": null,
-    "id": 340,
-    "name": "Lime Wedges",
     "category": "Fruit (Lime)"
   },
   {
@@ -2424,13 +2368,6 @@
   {
     "isInfusion": false,
     "rumCategory": null,
-    "id": 347,
-    "name": "Lustau Amontillado Sheery",
-    "category": "Sherry (Amontillado)"
-  },
-  {
-    "isInfusion": false,
-    "rumCategory": null,
     "id": 348,
     "name": "Lustau Amontillado Sherry",
     "category": "Sherry (Amontillado)"
@@ -2440,7 +2377,7 @@
     "rumCategory": null,
     "id": 349,
     "name": "Lustau East India Solera Sherry",
-    "category": "Sherry"
+    "category": "Sherry (Cream)"
   },
   {
     "isInfusion": false,
@@ -2454,7 +2391,7 @@
     "rumCategory": null,
     "id": 351,
     "name": "Lustau Manzanilla Sherry",
-    "category": "Sherry (Amontillado)"
+    "category": "Sherry (Manzanilla)"
   },
   {
     "isInfusion": false,
@@ -2769,14 +2706,7 @@
     "rumCategory": null,
     "id": 396,
     "name": "Orange Twist",
-    "category": "Twist (Orange)"
-  },
-  {
-    "isInfusion": false,
-    "rumCategory": null,
-    "id": 397,
-    "name": "Orange Twists",
-    "category": "Twist (Orange)"
+    "category": "Fruit (Orange)"
   },
   {
     "isInfusion": false,
@@ -2811,7 +2741,7 @@
     "rumCategory": null,
     "id": 402,
     "name": "Packed Golden Brown Sugar",
-    "category": "Packed Golden Brown Sugar"
+    "category": "Sugar (Golden Brown)"
   },
   {
     "isInfusion": false,
@@ -2884,13 +2814,6 @@
     "category": "Whiskey (Bourbon)"
   },
   {
-    "isInfusion": true,
-    "rumCategory": null,
-    "id": 413,
-    "name": "Pecan–Infused Buffalo Trace Bourbon",
-    "category": "Whiskey (Bourbon)"
-  },
-  {
     "isInfusion": false,
     "rumCategory": null,
     "id": 414,
@@ -2921,22 +2844,8 @@
   {
     "isInfusion": false,
     "rumCategory": null,
-    "id": 418,
-    "name": "Peychaud's",
-    "category": "Bitters (Creole)"
-  },
-  {
-    "isInfusion": false,
-    "rumCategory": null,
     "id": 419,
     "name": "Peychaud's Bitters",
-    "category": "Bitters (Creole)"
-  },
-  {
-    "isInfusion": false,
-    "rumCategory": null,
-    "id": 420,
-    "name": "Peychaud’s Bitters",
     "category": "Bitters (Creole)"
   },
   {
@@ -2958,13 +2867,6 @@
     "rumCategory": null,
     "id": 423,
     "name": "Pierre Ferrand Dry Curacao",
-    "category": "Liqueur (Orange)"
-  },
-  {
-    "isInfusion": false,
-    "rumCategory": null,
-    "id": 424,
-    "name": "Pierre Ferrand Dry Curaçao",
     "category": "Liqueur (Orange)"
   },
   {
@@ -3183,13 +3085,6 @@
     "id": 455,
     "name": "Rhum Jm 100-Proof Agricole Blanc",
     "category": "Rum (Cane AOC Martinique Rhum Agricole Blanc)"
-  },
-  {
-    "isInfusion": false,
-    "rumCategory": null,
-    "id": 456,
-    "name": "Rich Simple Syrup (2 Parts Sugar to 1 Part Water)",
-    "category": "Syrup (Rich Simple)"
   },
   {
     "isInfusion": false,
@@ -3448,7 +3343,7 @@
     "rumCategory": null,
     "id": 493,
     "name": "Sidewinder's Fang Peel",
-    "category": "Garnish (Sidewinder's Fang Peel)"
+    "category": "Fruit (Orange)"
   },
   {
     "isInfusion": false,
@@ -3705,13 +3600,6 @@
   {
     "isInfusion": false,
     "rumCategory": null,
-    "id": 530,
-    "name": "Suntory Hakashu 12-Year Whisky",
-    "category": "Whiskey (Japanese)"
-  },
-  {
-    "isInfusion": false,
-    "rumCategory": null,
     "id": 531,
     "name": "Suntory Hakushu 12-Year Whiskey",
     "category": "Whiskey (Japanese)"
@@ -3901,13 +3789,6 @@
   {
     "isInfusion": false,
     "rumCategory": null,
-    "id": 558,
-    "name": "Vanillla Syrup",
-    "category": "Syrup (Vanilla)"
-  },
-  {
-    "isInfusion": false,
-    "rumCategory": null,
     "id": 559,
     "name": "Velvet Falernum",
     "category": "Liqueur (Falernum)"
@@ -4036,7 +3917,7 @@
     "rumCategory": null,
     "id": 577,
     "name": "Yellow Chartreuse (Scant)",
-    "category": "Chartreuse (Yellow)"
+    "category": "Liqueur (Yellow Chartreuse)"
   },
   {
     "isInfusion": false,
