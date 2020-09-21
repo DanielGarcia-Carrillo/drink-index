@@ -17,37 +17,42 @@ export enum Inclusion {
 }
 
 interface Props {
-  ingredients: string[];
+  categories: string[];
   onSearch: (selected: string[], inclusion: Inclusion) => void;
+  onSelectionChange: () => void;
 }
 
 const BAR_INGREDIENTS_KEY = 'bar-ingredients';
 
-export default function Searchbar({ ingredients, onSearch }: Props) {
+export default function Searchbar({
+  categories,
+  onSearch,
+  onSelectionChange,
+}: Props) {
   const [inputValue, setInputValue] = useState('');
   const [includeEasy, setEasy] = useState(false);
 
-  // TODO: validate that the localstorage ingredients are still valid
-  const [ingredientsSelected, setSelected] = useLocalStorage<string[]>(
+  // TODO: validate that the localstorage categories are still valid
+  const [categoriesSelected, setSelected] = useLocalStorage<string[]>(
     BAR_INGREDIENTS_KEY,
     []
   );
 
   const options = useMemo(() => {
-    const selectedSet = new Set(ingredientsSelected);
-    return ingredients.filter(i => !selectedSet.has(i));
-  }, [ingredients, ingredientsSelected]);
+    const selectedSet = new Set(categoriesSelected);
+    return categories.filter(i => !selectedSet.has(i));
+  }, [categories, categoriesSelected]);
 
   const handleSearch = useCallback(() => {
     onSearch(
-      ingredientsSelected,
+      categoriesSelected,
       includeEasy ? Inclusion.Easy : Inclusion.Default
     );
-  }, [ingredientsSelected, includeEasy]);
+  }, [categoriesSelected, includeEasy]);
 
   const handleAllSearch = useCallback(() => {
-    onSearch(ingredientsSelected, Inclusion.All);
-  }, [ingredientsSelected]);
+    onSearch(categoriesSelected, Inclusion.All);
+  }, [categoriesSelected]);
 
   return (
     <>
@@ -63,9 +68,10 @@ export default function Searchbar({ ingredients, onSearch }: Props) {
           if (
             reason === 'select-option' &&
             value &&
-            !ingredientsSelected.includes(value)
+            !categoriesSelected.includes(value)
           ) {
-            setSelected([...ingredientsSelected, value].sort());
+            setSelected([...categoriesSelected, value].sort());
+            onSelectionChange();
           }
         }}
         renderInput={params => (
@@ -77,13 +83,14 @@ export default function Searchbar({ ingredients, onSearch }: Props) {
         )}
       />
       <div id="chip-list">
-        {ingredientsSelected.map(i => (
+        {categoriesSelected.map(i => (
           <Chip
             className="chip"
             variant="outlined"
             label={i}
             onDelete={() => {
-              setSelected(ingredientsSelected.filter(s => s !== i));
+              setSelected(categoriesSelected.filter(s => s !== i));
+              onSelectionChange();
             }}
           />
         ))}

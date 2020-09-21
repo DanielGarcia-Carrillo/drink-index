@@ -239,10 +239,11 @@
   },
   {
     "isInfusion": false,
-    "rumCategory": null,
+    "rumCategory": 2,
     "id": 35,
-    "name": "Appleton Estate V/x Rum",
-    "category": "Rum (Jamaican)"
+    "notes": "Originally V/X but AE replaced it with Signature ~2014",
+    "name": "Appleton Estate Signature Rum",
+    "category": "Rum (Blended Lightly Aged)"
   },
   {
     "isInfusion": false,
