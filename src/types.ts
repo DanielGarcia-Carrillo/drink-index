@@ -7,8 +7,8 @@ export interface Ingredient {
 }
 
 interface IngredientReference {
-  type: 'SINGLE' | 'CHOICE';
   ingredientId: Ingredient['id'];
+  usages?: ('GARNISH' | 'RINSE' | 'FLOAT' | 'MAIN')[];
 }
 
 interface Spec {

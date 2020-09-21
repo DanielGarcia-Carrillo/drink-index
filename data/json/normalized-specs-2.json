@@ -4280,9 +4280,6 @@
     "pageNum": "150",
     "ingredients": [
       {
-        "ingredientId": 560
-      },
-      {
         "ingredientId": 459
       },
       {
@@ -4295,7 +4292,8 @@
         "ingredientId": 371
       },
       {
-        "ingredientId": 560
+        "ingredientId": 560,
+        "usages": ["RINSE", "MAIN"]
       }
     ],
     "instructions": "GARNISH: 1 LEMON TWIST Rinse a Nick & Nora glass with absinthe and dump. Stir the remaining ingredients over ice, then strain into the glass. Garnish with the lemon twist.",

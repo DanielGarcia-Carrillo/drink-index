@@ -1,12 +1,12 @@
-import specData from '../data/json/normalized-specs-2.json';
-import ingredientData from '../data/json/ingredients-1.json';
+import specData from '../../data/json/normalized-specs-2.json';
+import ingredientData from '../../data/json/ingredients-1.json';
 import type {
   Ingredient,
   FormattedSpec,
   RawSpec,
   AnnotatedIngredient,
-} from './types';
-import { Inclusion } from './components/searchbar';
+} from '../types';
+import { Inclusion } from '../components/searchbar';
 
 const EASY_TO_GET = ['Syrup', 'Sugar', 'Juice', 'Fruit', 'Beer'];
 
@@ -14,6 +14,8 @@ const specs: RawSpec[] = specData;
 
 const categoriesSet = new Set(ingredientData.map(i => i.category));
 const ingredientCategories = Array.from(categoriesSet).sort();
+
+const sources = Array.from(new Set(specs.map(s => s.origin))).sort();
 
 export function getInvalidCategories(categories: string[]): string[] {
   return categories.filter(c => !categoriesSet.has(c));
@@ -35,6 +37,10 @@ export function getAllIngredientCategories(): string[] {
   return ingredientCategories;
 }
 
+export function getSources() {
+  return sources;
+}
+
 function getAnnotatedIngredients(
   selectedCategories: string[]
 ): Map<number, AnnotatedIngredient> {
@@ -45,7 +51,7 @@ function getAnnotatedIngredients(
       i.id,
       {
         ...i,
-        missing: !selectedSet.has(i.category),
+        missing: !selectedSet.has(i.category) || i.isInfusion,
       },
     ])
   );

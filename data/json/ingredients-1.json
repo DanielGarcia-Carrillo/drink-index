@@ -1531,7 +1531,7 @@
     "rumCategory": null,
     "id": 222,
     "name": "Espresso-Infused Demerara Syrup",
-    "category": "Syrup (Demerara)"
+    "category": "Syrup (Demerara) (Coffee)"
   },
   {
     "isInfusion": false,
@@ -2221,16 +2221,19 @@
   },
   {
     "isInfusion": false,
-    "rumCategory": null,
+    "rumCategory": 6,
     "id": 323,
     "name": "Lemon Hart 151 Rum",
-    "category": "Rum (Demerara Overproof)"
+    "category": "Rum (Black Blended Overproof)",
+    "origin": "Demerara",
+    "subCategories": ["British", "Demerara", "Overproof"]
   },
   {
     "isInfusion": false,
     "rumCategory": null,
     "id": 324,
     "name": "Lemon Hart Original Rum",
+    "origin": "Demerara",
     "category": "Rum (Demerara)"
   },
   {

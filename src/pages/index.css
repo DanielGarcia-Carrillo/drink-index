@@ -22,3 +22,8 @@
 .spec .missing {
   color: #e2325a;
 }
+
+.spec .category {
+  display: none;
+  color: #555;
+}

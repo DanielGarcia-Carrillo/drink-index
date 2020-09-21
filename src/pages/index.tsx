@@ -43,9 +43,10 @@ export default function IndexPage() {
         onSearch={handleSearch}
         onSelectionChange={handleSelection}
       />
+      <h3>{availableSpecs.length} specs available</h3>
       <div id="recipes">
         {availableSpecs.map(spec => (
-          <Card>
+          <Card key={`${spec.name}-${spec.origin}`}>
             <CardContent className="spec">
               <h3>{spec.name}</h3>
               <p className="secondary origin">
@@ -54,11 +55,12 @@ export default function IndexPage() {
               <ul>
                 {spec.ingredients.map(i => (
                   <li
+                    key={i.id}
                     className={`secondary list-item ${
                       i.missing ? 'missing' : ''
                     }`}
                   >
-                    {i.name}
+                    {i.name} <span className="category">({i.category})</span>
                   </li>
                 ))}
               </ul>
