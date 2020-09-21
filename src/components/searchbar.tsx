@@ -3,13 +3,13 @@ import React, { useCallback, useMemo, useState } from 'react';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import TextField from '@material-ui/core/TextField';
 import Chip from '@material-ui/core/Chip';
-import useLocalStorage from '../hooks/useLocalStorage';
 import Button from '@material-ui/core/Button';
 import Checkbox from '@material-ui/core/Checkbox';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 
 import './searchbar.css';
 import { getInvalidCategories } from '../orm';
+import useBarInventory from '../hooks/useBarInventory';
 
 export enum Inclusion {
   Default,
@@ -23,8 +23,6 @@ interface Props {
   onSelectionChange: () => void;
 }
 
-const BAR_INGREDIENTS_KEY = 'bar-ingredients';
-
 export default function Searchbar({
   categories,
   onSearch,
@@ -33,28 +31,25 @@ export default function Searchbar({
   const [inputValue, setInputValue] = useState('');
   const [includeEasy, setEasy] = useState(false);
 
-  const [categoriesSelected, setSelected] = useLocalStorage<string[]>(
-    BAR_INGREDIENTS_KEY,
-    []
-  );
+  const { selectedCategories, setCategory, deleteCategory } = useBarInventory();
 
-  const invalidCategories = getInvalidCategories(categoriesSelected);
+  const invalidCategories = getInvalidCategories(selectedCategories);
 
   const options = useMemo(() => {
-    const selectedSet = new Set(categoriesSelected);
+    const selectedSet = new Set(selectedCategories);
     return categories.filter(i => !selectedSet.has(i));
-  }, [categories, categoriesSelected]);
+  }, [categories, selectedCategories]);
 
   const handleSearch = useCallback(() => {
     onSearch(
-      categoriesSelected,
+      selectedCategories,
       includeEasy ? Inclusion.Easy : Inclusion.Default
     );
-  }, [categoriesSelected, includeEasy]);
+  }, [selectedCategories, includeEasy]);
 
   const handleAllSearch = useCallback(() => {
-    onSearch(categoriesSelected, Inclusion.All);
-  }, [categoriesSelected]);
+    onSearch(selectedCategories, Inclusion.All);
+  }, [selectedCategories]);
 
   return (
     <>
@@ -70,9 +65,9 @@ export default function Searchbar({
           if (
             reason === 'select-option' &&
             value &&
-            !categoriesSelected.includes(value)
+            !selectedCategories.includes(value)
           ) {
-            setSelected([...categoriesSelected, value].sort());
+            setCategory(value);
             onSelectionChange();
           }
         }}
@@ -86,14 +81,14 @@ export default function Searchbar({
       />
 
       <div className="chip-list">
-        {categoriesSelected.map(i => (
+        {selectedCategories.map(i => (
           <Chip
             key={i}
             className="chip"
             variant="outlined"
             label={i}
             onDelete={() => {
-              setSelected(categoriesSelected.filter(s => s !== i));
+              deleteCategory(i);
               onSelectionChange();
             }}
           />
@@ -112,7 +107,7 @@ export default function Searchbar({
                 color="secondary"
                 label={i}
                 onDelete={() => {
-                  setSelected(categoriesSelected.filter(s => s !== i));
+                  deleteCategory(i);
                   onSelectionChange();
                 }}
               />

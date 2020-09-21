@@ -10,7 +10,7 @@ export default function useLocalStorage<T>(
     try {
       // Only call from localstorage on useEffect to prevent client server mismatch
       const item = window.localStorage.getItem(key);
-      if (item) {
+      if (item && item.length) {
         setStoredValue(JSON.parse(item));
       }
     } catch (error) {

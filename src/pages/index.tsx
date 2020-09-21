@@ -14,6 +14,7 @@ import {
   getAllSpecsAnnotated,
   getAvailableSpecsAnnotated,
 } from '../orm';
+import { GatsbyLink as Link } from 'gatsby-theme-material-ui';
 
 export default function IndexPage() {
   const [availableSpecs, setSpecs] = useState<FormattedSpec[]>([]);
@@ -38,6 +39,7 @@ export default function IndexPage() {
   return (
     <Layout>
       <SEO title="Cocktails" />
+      <Link to="back-bar">Back bar</Link>
       <Searchbar
         categories={getAllIngredientCategories()}
         onSearch={handleSearch}
