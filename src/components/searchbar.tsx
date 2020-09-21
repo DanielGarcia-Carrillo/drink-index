@@ -9,6 +9,7 @@ import Checkbox from '@material-ui/core/Checkbox';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 
 import './searchbar.css';
+import { getInvalidCategories } from '../orm';
 
 export enum Inclusion {
   Default,
@@ -32,11 +33,12 @@ export default function Searchbar({
   const [inputValue, setInputValue] = useState('');
   const [includeEasy, setEasy] = useState(false);
 
-  // TODO: validate that the localstorage categories are still valid
   const [categoriesSelected, setSelected] = useLocalStorage<string[]>(
     BAR_INGREDIENTS_KEY,
     []
   );
+
+  const invalidCategories = getInvalidCategories(categoriesSelected);
 
   const options = useMemo(() => {
     const selectedSet = new Set(categoriesSelected);
@@ -82,9 +84,11 @@ export default function Searchbar({
           />
         )}
       />
-      <div id="chip-list">
+
+      <div className="chip-list">
         {categoriesSelected.map(i => (
           <Chip
+            key={i}
             className="chip"
             variant="outlined"
             label={i}
@@ -95,6 +99,28 @@ export default function Searchbar({
           />
         ))}
       </div>
+
+      {!!invalidCategories.length && (
+        <>
+          <h3>Invalid Categories</h3>
+          <div className="chip-list">
+            {invalidCategories.map(i => (
+              <Chip
+                key={i}
+                className="chip"
+                variant="outlined"
+                color="secondary"
+                label={i}
+                onDelete={() => {
+                  setSelected(categoriesSelected.filter(s => s !== i));
+                  onSelectionChange();
+                }}
+              />
+            ))}
+          </div>
+        </>
+      )}
+
       <Button
         className="filter"
         color="primary"

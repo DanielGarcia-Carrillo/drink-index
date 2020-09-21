@@ -4,13 +4,14 @@
   background-color: white;
 }
 
-#chip-list {
+.chip-list {
   min-height: 40px;
-  margin: 20px 0;
+  margin: 20px -4px;
 }
 
-#chip-list .chip {
+.chip-list .chip {
   background-color: white;
+  margin: 4px;
 }
 
 button.filter {

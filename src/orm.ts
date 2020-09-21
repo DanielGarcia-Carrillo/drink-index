@@ -12,9 +12,12 @@ const EASY_TO_GET = ['Syrup', 'Sugar', 'Juice', 'Fruit', 'Beer'];
 
 const specs: RawSpec[] = specData;
 
-const ingredientCategories = Array.from(
-  new Set(ingredientData.map(i => i.category))
-).sort();
+const categoriesSet = new Set(ingredientData.map(i => i.category));
+const ingredientCategories = Array.from(categoriesSet).sort();
+
+export function getInvalidCategories(categories: string[]): string[] {
+  return categories.filter(c => !categoriesSet.has(c));
+}
 
 function getIngredient<T extends Ingredient>(
   id: number,
