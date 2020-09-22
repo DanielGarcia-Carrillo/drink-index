@@ -31,7 +31,13 @@ const Header = ({ siteTitle, maxWidth }: Props) => (
           ['/', 'Search'],
           ['/bar-back', 'Bar Back'],
         ].map(([href, text]) => (
-          <Button key={href} className="nav-link" color="inherit" href={href}>
+          <Button
+            key={href}
+            to={href}
+            component={Link}
+            className="nav-link"
+            color="inherit"
+          >
             {text}
           </Button>
         ))}
