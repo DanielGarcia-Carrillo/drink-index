@@ -29,32 +29,34 @@ export default function IndexPage() {
     <Layout>
       <SEO title="Cocktails" />
 
-      <Filterbar onSearch={handleSearch} />
+      <div id="homepage">
+        <Filterbar onSearch={handleSearch} />
 
-      <h3>{availableSpecs.length} specs available</h3>
-      <div id="recipes">
-        {availableSpecs.map(spec => (
-          <Card key={`${spec.name}-${spec.origin}`}>
-            <CardContent className="spec">
-              <h3>{spec.name}</h3>
-              <p className="secondary origin">
-                {spec.origin} - {spec.pageNum}
-              </p>
-              <ul>
-                {spec.ingredients.map(i => (
-                  <li
-                    key={i.id}
-                    className={`secondary list-item ${
-                      i.missing ? 'missing' : ''
-                    }`}
-                  >
-                    {i.name} <span className="category">({i.category})</span>
-                  </li>
-                ))}
-              </ul>
-            </CardContent>
-          </Card>
-        ))}
+        <h3>{availableSpecs.length} specs available</h3>
+        <div id="specs">
+          {availableSpecs.map(spec => (
+            <Card key={`${spec.name}-${spec.origin}`}>
+              <CardContent className="spec">
+                <h3>{spec.name}</h3>
+                <p className="secondary origin">
+                  {spec.origin} - {spec.pageNum}
+                </p>
+                <ul>
+                  {spec.ingredients.map(i => (
+                    <li
+                      key={i.id}
+                      className={`secondary list-item ${
+                        i.missing ? 'missing' : ''
+                      }`}
+                    >
+                      {i.name} <span className="category">({i.category})</span>
+                    </li>
+                  ))}
+                </ul>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
       </div>
     </Layout>
   );

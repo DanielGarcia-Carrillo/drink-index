@@ -70,7 +70,8 @@ function getAnnotatedSpecs(
         getIngredient(i.ingredientId, annotatedIngredientMap)
       ),
     }))
-    .filter(s => ingredientPredicate(s.ingredients));
+    .filter(s => ingredientPredicate(s.ingredients))
+    .sort(({ name: a }, { name: b }) => a.localeCompare(b));
 }
 
 export function getAllSpecsAnnotated(

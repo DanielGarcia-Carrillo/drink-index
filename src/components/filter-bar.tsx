@@ -34,7 +34,7 @@ export default function Filterbar({ onSearch }: Props) {
   }, [selectedCategories]);
 
   return (
-    <>
+    <div>
       <Button
         className="filter"
         color="primary"
@@ -64,6 +64,6 @@ export default function Filterbar({ onSearch }: Props) {
           />
         }
       />
-    </>
+    </div>
   );
 }

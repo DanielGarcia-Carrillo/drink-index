@@ -15,6 +15,10 @@ header {
   background: #202020;
 }
 
+main {
+  margin: 1.5rem auto;
+}
+
 #header-contents .nav-link {
   color: white;
 }
@@ -27,11 +31,11 @@ header {
 main {
   max-width: var(--max-content-width);
   padding: 0 var(--content-padding);
-  margin: 0 auto;
 }
 
 #header-contents {
   display: flex;
+  margin: 0 auto;
   padding-top: 1rem;
   padding-bottom: 1rem;
   justify-content: space-between;
