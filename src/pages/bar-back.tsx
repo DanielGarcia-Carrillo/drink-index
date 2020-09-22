@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import Accordion from '@material-ui/core/Accordion';
 import AccordionSummary from '@material-ui/core/AccordionSummary';
 import AccordionDetails from '@material-ui/core/AccordionDetails';
@@ -10,19 +10,39 @@ import SEO from '../components/seo';
 import getCategorizedCategories from '../orm/getCategorizedCategories';
 import useBarInventory from '../hooks/useBarInventory';
 
+import './bar-back.css';
+import Searchbar from '../components/searchbar';
+import { getAllIngredientCategories } from '../orm';
+
+function SelectedCount({
+  categories,
+  selected,
+}: {
+  categories: string[];
+  selected: Set<string>;
+}) {
+  const count = categories.filter(c => selected.has(c)).length;
+  return count ? (
+    <div className="selected-count secondary"> ({count})</div>
+  ) : null;
+}
+
 export default function BackBarPage() {
   const { selectedCategories, setCategory, deleteCategory } = useBarInventory();
 
   const selectedSet = new Set(selectedCategories);
 
+  const lists = useMemo(() => Object.entries(getCategorizedCategories()), []);
+
   return (
     <Layout>
-      <SEO title="Back bar" />
-      {Object.entries(getCategorizedCategories()).map(
-        ([categoryName, categories]) => (
+      <SEO title="Bar Back" />
+      <div id="bar-back">
+        {lists.map(([categoryName, categories]) => (
           <Accordion key={categoryName}>
             <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-              {categoryName}
+              <div>{categoryName} </div>
+              <SelectedCount selected={selectedSet} categories={categories} />
             </AccordionSummary>
             <AccordionDetails>
               <div className="chip-list">
@@ -30,7 +50,8 @@ export default function BackBarPage() {
                   <Chip
                     key={c}
                     className="chip"
-                    variant="outlined"
+                    variant={selectedSet.has(c) ? 'default' : 'outlined'}
+                    color="primary"
                     label={c}
                     onClick={() => setCategory(c)}
                     onDelete={
@@ -41,8 +62,9 @@ export default function BackBarPage() {
               </div>
             </AccordionDetails>
           </Accordion>
-        )
-      )}
+        ))}
+        {/* <Searchbar categories={getAllIngredientCategories()} /> */}
+      </div>
     </Layout>
   );
 }

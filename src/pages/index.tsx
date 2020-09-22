@@ -7,14 +7,9 @@ import Layout from '../components/layout';
 import SEO from '../components/seo';
 
 import './index.css';
-import Searchbar, { Inclusion } from '../components/searchbar';
 import { FormattedSpec } from '../types';
-import {
-  getAllIngredientCategories,
-  getAllSpecsAnnotated,
-  getAvailableSpecsAnnotated,
-} from '../orm';
-import { GatsbyLink as Link } from 'gatsby-theme-material-ui';
+import { getAllSpecsAnnotated, getAvailableSpecsAnnotated } from '../orm';
+import Filterbar, { Inclusion } from '../components/filter-bar';
 
 export default function IndexPage() {
   const [availableSpecs, setSpecs] = useState<FormattedSpec[]>([]);
@@ -30,21 +25,12 @@ export default function IndexPage() {
     []
   );
 
-  const handleSelection = useCallback(() => {
-    if (availableSpecs.length) {
-      setSpecs([]);
-    }
-  }, [availableSpecs.length]);
-
   return (
     <Layout>
       <SEO title="Cocktails" />
-      <Link to="back-bar">Back bar</Link>
-      <Searchbar
-        categories={getAllIngredientCategories()}
-        onSearch={handleSearch}
-        onSelectionChange={handleSelection}
-      />
+
+      <Filterbar onSearch={handleSearch} />
+
       <h3>{availableSpecs.length} specs available</h3>
       <div id="recipes">
         {availableSpecs.map(spec => (

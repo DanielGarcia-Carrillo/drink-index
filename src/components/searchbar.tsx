@@ -3,33 +3,21 @@ import React, { useCallback, useMemo, useState } from 'react';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import TextField from '@material-ui/core/TextField';
 import Chip from '@material-ui/core/Chip';
-import Button from '@material-ui/core/Button';
-import Checkbox from '@material-ui/core/Checkbox';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
 
 import './searchbar.css';
 import { getInvalidCategories } from '../orm';
 import useBarInventory from '../hooks/useBarInventory';
 
-export enum Inclusion {
-  Default,
-  Easy,
-  All,
-}
-
 interface Props {
   categories: string[];
-  onSearch: (selected: string[], inclusion: Inclusion) => void;
-  onSelectionChange: () => void;
+  onSelectionChange?: () => void;
 }
 
 export default function Searchbar({
   categories,
-  onSearch,
-  onSelectionChange,
+  onSelectionChange = () => {},
 }: Props) {
   const [inputValue, setInputValue] = useState('');
-  const [includeEasy, setEasy] = useState(false);
 
   const { selectedCategories, setCategory, deleteCategory } = useBarInventory();
 
@@ -39,17 +27,6 @@ export default function Searchbar({
     const selectedSet = new Set(selectedCategories);
     return categories.filter(i => !selectedSet.has(i));
   }, [categories, selectedCategories]);
-
-  const handleSearch = useCallback(() => {
-    onSearch(
-      selectedCategories,
-      includeEasy ? Inclusion.Easy : Inclusion.Default
-    );
-  }, [selectedCategories, includeEasy]);
-
-  const handleAllSearch = useCallback(() => {
-    onSearch(selectedCategories, Inclusion.All);
-  }, [selectedCategories]);
 
   return (
     <>
@@ -115,34 +92,6 @@ export default function Searchbar({
           </div>
         </>
       )}
-
-      <Button
-        className="filter"
-        color="primary"
-        size="large"
-        variant="contained"
-        onClick={handleAllSearch}
-      >
-        Show All
-      </Button>
-      <Button
-        className="filter"
-        color="primary"
-        size="large"
-        variant="contained"
-        onClick={handleSearch}
-      >
-        Filter Results
-      </Button>
-      <FormControlLabel
-        label="Include easily attainable ingredients"
-        control={
-          <Checkbox
-            checked={includeEasy}
-            onChange={() => setEasy(!includeEasy)}
-          />
-        }
-      />
     </>
   );
 }

@@ -10,10 +10,6 @@
 }
 
 .chip-list .chip {
-  background-color: white;
+  /* background-color: white; */
   margin: 4px;
-}
-
-button.filter {
-  margin-right: 20px;
 }

@@ -6,7 +6,7 @@ import type {
   RawSpec,
   AnnotatedIngredient,
 } from '../types';
-import { Inclusion } from '../components/searchbar';
+import { Inclusion } from '../components/filter-bar';
 
 const EASY_TO_GET = ['Syrup', 'Sugar', 'Juice', 'Fruit', 'Beer'];
 
