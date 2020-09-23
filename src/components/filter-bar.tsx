@@ -1,11 +1,10 @@
-import React, { useCallback, useMemo, useState } from 'react';
+import React, { useCallback, useState } from 'react';
 
-import Button from '@material-ui/core/Button';
-import Checkbox from '@material-ui/core/Checkbox';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Switch from '@material-ui/core/Switch';
 
 import './filter-bar.css';
-import useBarInventory from '../hooks/useBarInventory';
+import KeywordSearch from './keyword-search';
 
 export enum Inclusion {
   Default,
@@ -15,55 +14,80 @@ export enum Inclusion {
 
 interface Props {
   onSearch: (selected: string[], inclusion: Inclusion) => void;
+  onKeywordSearch: (keywords: string[], inclusion: Inclusion) => void;
+  keywords: string[];
+  selectedCategories: string[];
 }
 
-export default function Filterbar({ onSearch }: Props) {
+function inclusionFromToggle(
+  includeEasy: boolean,
+  includeBarOnly: boolean
+): Inclusion {
+  if (!includeBarOnly) {
+    return Inclusion.All;
+  }
+
+  return includeEasy ? Inclusion.Easy : Inclusion.Default;
+}
+
+export default function Filterbar({
+  onSearch,
+  onKeywordSearch,
+  selectedCategories,
+}: Props) {
   const [includeEasy, setEasy] = useState(false);
+  const [includeBarOnly, setBarOnly] = useState(true);
 
-  const { selectedCategories } = useBarInventory();
+  const handleToggle = useCallback(
+    ({ target: { checked } }: React.ChangeEvent<HTMLInputElement>) => {
+      setBarOnly(checked);
 
-  const handleSearch = useCallback(() => {
-    onSearch(
-      selectedCategories,
-      includeEasy ? Inclusion.Easy : Inclusion.Default
-    );
-  }, [selectedCategories, includeEasy]);
+      onSearch(selectedCategories, inclusionFromToggle(includeEasy, checked));
+    },
+    [selectedCategories, includeEasy]
+  );
 
-  const handleAllSearch = useCallback(() => {
-    onSearch(selectedCategories, Inclusion.All);
-  }, [selectedCategories]);
+  const handleEasyToggle = useCallback(
+    ({ target: { checked } }: React.ChangeEvent<HTMLInputElement>) => {
+      setEasy(checked);
+
+      onSearch(
+        selectedCategories,
+        inclusionFromToggle(checked, includeBarOnly)
+      );
+    },
+    [selectedCategories, includeBarOnly]
+  );
+
+  const handleKeywordSearch = useCallback(
+    (keywords: string[]) => {
+      onKeywordSearch(
+        keywords,
+        inclusionFromToggle(includeEasy, includeBarOnly)
+      );
+    },
+    [includeBarOnly, includeEasy]
+  );
 
   return (
-    <div>
-      <Button
-        className="filter"
-        color="primary"
-        size="large"
-        variant="contained"
-        onClick={handleAllSearch}
-      >
-        Show All
-      </Button>
-
-      <Button
-        className="filter"
-        color="primary"
-        size="large"
-        variant="contained"
-        onClick={handleSearch}
-      >
-        Filter Results
-      </Button>
+    <div id="filter-bar">
+      <FormControlLabel
+        control={<Switch defaultChecked onChange={handleToggle} />}
+        label="Include only specs with bar ingredients"
+      />
 
       <FormControlLabel
         label="Include easily attainable ingredients"
         control={
-          <Checkbox
+          <Switch
             checked={includeEasy}
-            onChange={() => setEasy(!includeEasy)}
+            disabled={!includeBarOnly}
+            onChange={handleEasyToggle}
           />
         }
       />
+
+      <KeywordSearch onSearch={handleKeywordSearch} />
     </div>
   );
 }

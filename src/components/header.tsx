@@ -6,10 +6,9 @@ import Button from '@material-ui/core/Button';
 
 interface Props {
   siteTitle: string;
-  maxWidth: number;
 }
 
-const Header = ({ siteTitle, maxWidth }: Props) => (
+const Header = ({ siteTitle }: Props) => (
   <header>
     <div id="header-contents">
       <h1 className="title" style={{ margin: 0 }}>
@@ -46,4 +45,4 @@ const Header = ({ siteTitle, maxWidth }: Props) => (
   </header>
 );
 
-export default Header;
+export default React.memo(Header);

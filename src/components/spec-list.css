@@ -1,0 +1,29 @@
+#specs {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  column-gap: 16px;
+  row-gap: 16px;
+}
+
+.spec .origin {
+  color: #555;
+}
+
+.spec .secondary {
+  font-size: 0.75rem;
+  line-height: 1.4;
+}
+
+.spec .list-item {
+  margin-left: 1rem;
+  list-style: initial;
+}
+
+.spec .missing {
+  color: #e2325a;
+}
+
+.spec .category {
+  display: none;
+  color: #555;
+}

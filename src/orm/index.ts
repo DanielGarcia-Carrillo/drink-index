@@ -93,3 +93,15 @@ export function getAvailableSpecsAnnotated(
     )
   );
 }
+
+export function filterSpecs(specs: FormattedSpec[], keywords: string[]) {
+  const keywordRegex = keywords.map(k => new RegExp(k, 'i'));
+  return specs.filter(spec => {
+    const specString = JSON.stringify([
+      spec.name,
+      spec.origin,
+      spec.ingredients.map(i => [i.name, i.category]),
+    ]);
+    return keywordRegex.every(r => r.test(specString));
+  });
+}

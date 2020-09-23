@@ -1,28 +1,53 @@
 import React, { useCallback, useState } from 'react';
 
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
-
 import Layout from '../components/layout';
 import SEO from '../components/seo';
 
 import './index.css';
 import { FormattedSpec } from '../types';
-import { getAllSpecsAnnotated, getAvailableSpecsAnnotated } from '../orm';
+import {
+  filterSpecs,
+  getAllSpecsAnnotated,
+  getAvailableSpecsAnnotated,
+} from '../orm';
 import Filterbar, { Inclusion } from '../components/filter-bar';
+import SpecList from '../components/spec-list';
+import useBarInventory from '../hooks/useBarInventory';
 
 export default function IndexPage() {
-  const [availableSpecs, setSpecs] = useState<FormattedSpec[]>([]);
+  const { selectedCategories } = useBarInventory();
+  const [keywords, setKeywords] = useState<string[]>([]);
+  const [{ available, filtered }, setSpecs] = useState({
+    available: getAvailableSpecsAnnotated(
+      selectedCategories,
+      Inclusion.Default
+    ),
+    filtered: getAvailableSpecsAnnotated(selectedCategories, Inclusion.Default),
+  });
 
   const handleSearch = useCallback(
     (selected: string[], inclusion: Inclusion) => {
-      setSpecs(
+      const specs =
         inclusion === Inclusion.All
           ? getAllSpecsAnnotated(selected)
-          : getAvailableSpecsAnnotated(selected, inclusion)
-      );
+          : getAvailableSpecsAnnotated(selected, inclusion);
+      setSpecs({
+        available: specs,
+        filtered: keywords.length ? filterSpecs(specs, keywords) : specs,
+      });
     },
-    []
+    [keywords]
+  );
+
+  const handleKeywordSearch = useCallback(
+    (newKeywords: string[]) => {
+      setKeywords(newKeywords);
+      setSpecs({
+        available,
+        filtered: filterSpecs(available, newKeywords),
+      });
+    },
+    [available]
   );
 
   return (
@@ -30,33 +55,14 @@ export default function IndexPage() {
       <SEO title="Cocktails" />
 
       <div id="homepage">
-        <Filterbar onSearch={handleSearch} />
+        <Filterbar
+          onSearch={handleSearch}
+          onKeywordSearch={handleKeywordSearch}
+          keywords={keywords}
+          selectedCategories={selectedCategories}
+        />
 
-        <h3>{availableSpecs.length} specs available</h3>
-        <div id="specs">
-          {availableSpecs.map(spec => (
-            <Card key={`${spec.name}-${spec.origin}`}>
-              <CardContent className="spec">
-                <h3>{spec.name}</h3>
-                <p className="secondary origin">
-                  {spec.origin} - {spec.pageNum}
-                </p>
-                <ul>
-                  {spec.ingredients.map(i => (
-                    <li
-                      key={i.id}
-                      className={`secondary list-item ${
-                        i.missing ? 'missing' : ''
-                      }`}
-                    >
-                      {i.name} <span className="category">({i.category})</span>
-                    </li>
-                  ))}
-                </ul>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
+        <SpecList specs={filtered} />
       </div>
     </Layout>
   );
