@@ -1,0 +1,10 @@
+.keyword-search {
+  width: 100%;
+  background-color: white;
+}
+
+@media screen and (min-width: 30rem) {
+  .keyword-search {
+    width: 20rem;
+  }
+}

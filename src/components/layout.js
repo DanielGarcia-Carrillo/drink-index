@@ -24,8 +24,6 @@ const Layout = ({ children }) => {
     }
   `);
 
-  const maxWidth = 1400;
-
   return (
     <>
       <Header siteTitle={data.site.siteMetadata.title} />

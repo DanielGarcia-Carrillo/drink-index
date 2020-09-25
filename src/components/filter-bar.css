@@ -2,10 +2,6 @@ button.filter {
   margin-right: 20px;
 }
 
-.keyword-search {
-  width: 20rem;
-}
-
 #filter-bar > * {
   margin-bottom: 1rem;
 }

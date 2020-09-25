@@ -2,22 +2,23 @@ import React, { useState } from 'react';
 import TextField from '@material-ui/core/TextField';
 import Chip from '@material-ui/core/Chip';
 
+import './keyword-search.css';
+
 interface Props {
-  onSearch: (keywords: string[]) => void;
+  keywords: string[];
+  onSearch: (newKeywords: string[]) => void;
 }
 
-export default function KeywordSearch({ onSearch }: Props) {
-  const [keywords, setKeywords] = useState<string[]>([]);
+export default function KeywordSearch({ keywords, onSearch }: Props) {
   return (
-    <div>
+    <>
       <TextField
         className="keyword-search"
-        label="What would you like to use?"
+        label="What would you like?"
+        placeholder="Whiskey, Daiquiri..."
         onKeyPress={e => {
           if (e.key === 'Enter') {
-            const newKeywords = [...keywords, e.target.value].sort();
-            setKeywords(newKeywords);
-            onSearch(newKeywords);
+            onSearch([...keywords, e.target.value].sort());
           }
         }}
         variant="outlined"
@@ -32,13 +33,11 @@ export default function KeywordSearch({ onSearch }: Props) {
             variant="outlined"
             label={word}
             onDelete={() => {
-              const newKeywords = keywords.filter(k => k !== word);
-              setKeywords(newKeywords);
-              onSearch(newKeywords);
+              onSearch(keywords.filter(k => k !== word));
             }}
           />
         ))}
       </div>
-    </div>
+    </>
   );
 }

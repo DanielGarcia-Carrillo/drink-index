@@ -4,7 +4,6 @@ import Layout from '../components/layout';
 import SEO from '../components/seo';
 
 import './index.css';
-import { FormattedSpec } from '../types';
 import {
   filterSpecs,
   getAllSpecsAnnotated,
@@ -25,7 +24,7 @@ export default function IndexPage() {
     filtered: getAvailableSpecsAnnotated(selectedCategories, Inclusion.Default),
   });
 
-  const handleSearch = useCallback(
+  const handleFilterChange = useCallback(
     (selected: string[], inclusion: Inclusion) => {
       const specs =
         inclusion === Inclusion.All
@@ -41,11 +40,11 @@ export default function IndexPage() {
 
   const handleKeywordSearch = useCallback(
     (newKeywords: string[]) => {
-      setKeywords(newKeywords);
       setSpecs({
         available,
         filtered: filterSpecs(available, newKeywords),
       });
+      setKeywords(newKeywords);
     },
     [available]
   );
@@ -56,7 +55,7 @@ export default function IndexPage() {
 
       <div id="homepage">
         <Filterbar
-          onSearch={handleSearch}
+          onSearch={handleFilterChange}
           onKeywordSearch={handleKeywordSearch}
           keywords={keywords}
           selectedCategories={selectedCategories}

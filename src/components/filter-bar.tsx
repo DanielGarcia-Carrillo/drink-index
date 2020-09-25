@@ -31,6 +31,7 @@ function inclusionFromToggle(
 }
 
 export default function Filterbar({
+  keywords,
   onSearch,
   onKeywordSearch,
   selectedCategories,
@@ -44,7 +45,7 @@ export default function Filterbar({
 
       onSearch(selectedCategories, inclusionFromToggle(includeEasy, checked));
     },
-    [selectedCategories, includeEasy]
+    [selectedCategories, includeEasy, onSearch]
   );
 
   const handleEasyToggle = useCallback(
@@ -56,24 +57,26 @@ export default function Filterbar({
         inclusionFromToggle(checked, includeBarOnly)
       );
     },
-    [selectedCategories, includeBarOnly]
+    [selectedCategories, includeBarOnly, onSearch]
   );
 
   const handleKeywordSearch = useCallback(
-    (keywords: string[]) => {
+    (newKeywords: string[]) => {
       onKeywordSearch(
-        keywords,
+        newKeywords,
         inclusionFromToggle(includeEasy, includeBarOnly)
       );
     },
-    [includeBarOnly, includeEasy]
+    [includeBarOnly, includeEasy, onKeywordSearch]
   );
 
   return (
     <div id="filter-bar">
+      <KeywordSearch keywords={keywords} onSearch={handleKeywordSearch} />
+
       <FormControlLabel
         control={<Switch defaultChecked onChange={handleToggle} />}
-        label="Include only specs with bar ingredients"
+        label="Limit to back bar ingredients"
       />
 
       <FormControlLabel
@@ -86,8 +89,6 @@ export default function Filterbar({
           />
         }
       />
-
-      <KeywordSearch onSearch={handleKeywordSearch} />
     </div>
   );
 }
