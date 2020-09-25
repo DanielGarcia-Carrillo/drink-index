@@ -1,3 +1,11 @@
 #homepage > * + * {
   margin-top: 1rem;
 }
+
+.chip-list {
+  margin: 0 -0.5rem;
+}
+
+.chip-list .chip {
+  margin: 0.5rem;
+}

@@ -63,7 +63,6 @@ export default function BackBarPage() {
             </AccordionDetails>
           </Accordion>
         ))}
-        {/* <Searchbar categories={getAllIngredientCategories()} /> */}
       </div>
     </Layout>
   );

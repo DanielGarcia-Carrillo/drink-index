@@ -10,15 +10,25 @@ interface Props {
 }
 
 export default function KeywordSearch({ keywords, onSearch }: Props) {
+  const [currentText, setText] = useState('');
+
   return (
-    <>
+    <div className="keyword-search">
       <TextField
-        className="keyword-search"
+        className="keyword-search-input"
         label="What would you like?"
         placeholder="Whiskey, Daiquiri..."
+        value={currentText}
         onKeyPress={e => {
+          const inputValue = e.target.value;
           if (e.key === 'Enter') {
-            onSearch([...keywords, e.target.value].sort());
+            onSearch([...keywords, inputValue].sort());
+            setText('');
+          }
+        }}
+        onChange={({ target: { value } }) => {
+          if (value !== currentText) {
+            setText(value);
           }
         }}
         variant="outlined"
@@ -38,6 +48,6 @@ export default function KeywordSearch({ keywords, onSearch }: Props) {
           />
         ))}
       </div>
-    </>
+    </div>
   );
 }
