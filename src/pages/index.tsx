@@ -16,12 +16,16 @@ import useBarInventory from '../hooks/useBarInventory';
 export default function IndexPage() {
   const { selectedCategories } = useBarInventory();
   const [keywords, setKeywords] = useState<string[]>([]);
-  const [{ available, filtered }, setSpecs] = useState({
-    available: getAvailableSpecsAnnotated(
+
+  const [{ available, filtered }, setSpecs] = useState(() => {
+    const specs = getAvailableSpecsAnnotated(
       selectedCategories,
       Inclusion.Default
-    ),
-    filtered: getAvailableSpecsAnnotated(selectedCategories, Inclusion.Default),
+    );
+    return {
+      available: specs,
+      filtered: specs,
+    };
   });
 
   const handleFilterChange = useCallback(

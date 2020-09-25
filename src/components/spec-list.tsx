@@ -5,6 +5,7 @@ import CardContent from '@material-ui/core/CardContent';
 
 import './spec-list.css';
 import { FormattedSpec } from '../types';
+import usePartialRender from '../hooks/usePartialRender';
 
 interface Props {
   specs: FormattedSpec[];
@@ -34,13 +35,16 @@ const Spec = React.memo(({ spec }: { spec: FormattedSpec }) => {
 });
 
 export default function SpecList({ specs }: Props) {
+  const { maxToRender, triggerRef } = usePartialRender(specs.length);
+
   return (
     <>
       <h3>{specs.length} specs available</h3>
       <div id="specs">
-        {specs.map(spec => (
+        {specs.slice(0, maxToRender).map(spec => (
           <Spec key={`${spec.name}-${spec.origin}`} spec={spec} />
         ))}
+        <div ref={triggerRef} />
       </div>
     </>
   );
