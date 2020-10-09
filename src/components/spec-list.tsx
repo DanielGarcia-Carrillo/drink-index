@@ -13,8 +13,8 @@ interface Props {
 
 const Spec = React.memo(({ spec }: { spec: FormattedSpec }) => {
   return (
-    <Card>
-      <CardContent className="spec">
+    <Card className="spec">
+      <CardContent>
         <h3>{spec.name}</h3>
         <p className="secondary origin">
           {spec.origin} - {spec.pageNum}
