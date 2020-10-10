@@ -5,3 +5,18 @@ button.filter {
 #filter-bar > * {
   margin-bottom: 1rem;
 }
+
+.sort-menu {
+  min-width: 200px;
+}
+
+#sort-menu-select {
+  background-color: white;
+}
+
+.sort-menu .MuiInputLabel-outlined {
+  /* Hax to fix the strikethrough of outlined label */
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0) 40%, #fff 40%);
+  padding-left: 2px;
+  padding-right: 2px;
+}

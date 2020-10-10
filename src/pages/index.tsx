@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useMemo, useState } from 'react';
 
 import Layout from '../components/layout';
 import SEO from '../components/seo';
@@ -9,13 +9,14 @@ import {
   getAllSpecsAnnotated,
   getAvailableSpecsAnnotated,
 } from '../orm';
-import Filterbar, { Inclusion } from '../components/filter-bar';
+import Filterbar, { Inclusion, SortOrder } from '../components/filter-bar';
 import SpecList from '../components/spec-list';
 import useBarInventory from '../hooks/useBarInventory';
 
 export default function IndexPage() {
   const { selectedCategories } = useBarInventory();
   const [keywords, setKeywords] = useState<string[]>([]);
+  const [sort, setSortOrder] = useState<SortOrder>(SortOrder.Alphabetical);
 
   const [{ available, filtered }, setSpecs] = useState(() => {
     const specs = getAvailableSpecsAnnotated(
@@ -53,6 +54,23 @@ export default function IndexPage() {
     [available]
   );
 
+  const sortedSpecs = useMemo(() => {
+    return [...filtered].sort((a, b) => {
+      if (sort === SortOrder.PageNumber) {
+        return Number(a.pageNum) - Number(b.pageNum);
+      }
+      if (sort == SortOrder.MissingCount) {
+        return (
+          a.ingredients.filter(i => i.missing).length -
+          b.ingredients.filter(i => i.missing).length
+        );
+      }
+      return a.name
+        .toLocaleLowerCase()
+        .localeCompare(b.name.toLocaleLowerCase());
+    });
+  }, [filtered, sort]);
+
   return (
     <Layout>
       <SEO title="Cocktails" />
@@ -61,11 +79,13 @@ export default function IndexPage() {
         <Filterbar
           onSearch={handleFilterChange}
           onKeywordSearch={handleKeywordSearch}
+          onSort={setSortOrder}
           keywords={keywords}
           selectedCategories={selectedCategories}
+          sort={sort}
         />
 
-        <SpecList specs={filtered} />
+        <SpecList specs={sortedSpecs} />
       </div>
     </Layout>
   );
