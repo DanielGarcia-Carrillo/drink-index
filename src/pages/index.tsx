@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 
 import Layout from '../components/layout';
 import SEO from '../components/seo';
@@ -12,22 +12,33 @@ import {
 import Filterbar, { Inclusion, SortOrder } from '../components/filter-bar';
 import SpecList from '../components/spec-list';
 import useBarInventory from '../hooks/useBarInventory';
+import { FormattedSpec } from '../types';
+
+interface SpecState {
+  available: FormattedSpec[];
+  filtered: FormattedSpec[];
+}
 
 export default function IndexPage() {
   const { selectedCategories } = useBarInventory();
   const [keywords, setKeywords] = useState<string[]>([]);
   const [sort, setSortOrder] = useState<SortOrder>(SortOrder.Alphabetical);
 
-  const [{ available, filtered }, setSpecs] = useState(() => {
+  const [{ available, filtered }, setSpecs] = useState<SpecState>({
+    available: [],
+    filtered: [],
+  });
+
+  useEffect(() => {
     const specs = getAvailableSpecsAnnotated(
       selectedCategories,
       Inclusion.Default
     );
-    return {
+    setSpecs({
       available: specs,
       filtered: specs,
-    };
-  });
+    });
+  }, [selectedCategories]);
 
   const handleFilterChange = useCallback(
     (selected: string[], inclusion: Inclusion) => {
