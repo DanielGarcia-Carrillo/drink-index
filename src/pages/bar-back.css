@@ -5,3 +5,11 @@
 #bar-back .selected-count {
   margin-left: 4px;
 }
+
+.incremental-count.to-add {
+  color: 'green';
+}
+
+.incremental-count.to-remove {
+  color: 'red';
+}

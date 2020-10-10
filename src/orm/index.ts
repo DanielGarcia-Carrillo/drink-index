@@ -17,6 +17,62 @@ const ingredientCategories = Array.from(categoriesSet).sort();
 
 const sources = Array.from(new Set(specs.map(s => s.origin))).sort();
 
+function ingredientToCategory(ingredients: typeof ingredientData) {
+  return Object.fromEntries(ingredients.map(i => [i.id, i.category]));
+}
+
+export function getSpecId(spec: RawSpec | FormattedSpec) {
+  return `${spec.name}--${spec.origin}`;
+}
+
+let categoryIndex: Record<string, number>;
+let categoryMap: Record<number, string>;
+export function getCategoryCounts(): Record<string, number> {
+  if (categoryIndex) {
+    return categoryIndex;
+  }
+
+  categoryMap = ingredientToCategory(ingredientData);
+  categoryIndex = specs
+    .flatMap(s => s.ingredients.map(i => categoryMap[i.ingredientId]))
+    .reduce((acc, curr) => {
+      acc[curr] = (acc[curr] || 0) + 1;
+      return acc;
+    }, {} as Record<string, number>);
+
+  return categoryIndex;
+}
+
+export function getIncrementalCategoryCounts(
+  selectedCategories: string[]
+): Record<string, number> {
+  const selectedSet = new Set(selectedCategories);
+
+  if (!categoryMap) {
+    categoryMap = ingredientToCategory(ingredientData);
+  }
+
+  const categoryCounts: Record<string, number> = {};
+
+  specs.forEach(s => {
+    const categories = s.ingredients.map(i => categoryMap[i.ingredientId]);
+    const missingCategories = categories.filter(c => !selectedSet.has(c));
+
+    if (missingCategories.length === 0) {
+      // Removal of any one of these specs will cause this 1 spec to be unavailable
+      categories.forEach(c => {
+        categoryCounts[c] = (categoryCounts[c] || 0) + 1;
+      });
+    } else if (missingCategories.length === 1) {
+      // Missing 1 means, addition of this category will complete the spec
+      const category = missingCategories[0];
+      categoryCounts[category] = (categoryCounts[category] || 0) + 1;
+    }
+  });
+
+  return categoryCounts;
+}
+
 export function getInvalidCategories(categories: string[]): string[] {
   return categories.filter(c => !categoriesSet.has(c));
 }

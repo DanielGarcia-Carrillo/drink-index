@@ -12,7 +12,11 @@ import useBarInventory from '../hooks/useBarInventory';
 
 import './bar-back.css';
 import Searchbar from '../components/searchbar';
-import { getAllIngredientCategories } from '../orm';
+import {
+  getAllIngredientCategories,
+  getCategoryCounts,
+  getIncrementalCategoryCounts,
+} from '../orm';
 
 function SelectedCount({
   categories,
@@ -27,23 +31,59 @@ function SelectedCount({
   ) : null;
 }
 
+function mostUsed(
+  categoryCounts: Record<string, number>,
+  selectedSet: Set<string>,
+  total = 10
+) {
+  return Object.entries(categoryCounts)
+    .filter(([category]) => !selectedSet.has(category))
+    .sort(([, a], [, b]) => b - a)
+    .slice(0, total);
+}
+
 export default function BackBarPage() {
   const { selectedCategories, setCategory, deleteCategory } = useBarInventory();
 
   const selectedSet = new Set(selectedCategories);
 
   const lists = useMemo(() => Object.entries(getCategorizedCategories()), []);
+  const mostUsedMissingCategories = useMemo(
+    () => mostUsed(getCategoryCounts(), selectedSet),
+    [selectedCategories]
+  );
+  const incrementalCounts = useMemo(
+    () => getIncrementalCategoryCounts(selectedCategories),
+    [selectedCategories]
+  );
+  const mostIncrementalCategories = useMemo(
+    () => mostUsed(incrementalCounts, selectedSet),
+    [incrementalCounts, selectedCategories]
+  );
 
   return (
     <Layout>
       <SEO title="Bar Back" />
       <div id="bar-back">
+        <h2>Missing categories</h2>
+        {mostUsedMissingCategories.map(([category, total]) => (
+          <div>
+            {category} - {total}
+          </div>
+        ))}
+        <h2>Most effective purchases</h2>
+        {mostIncrementalCategories.map(([category, total]) => (
+          <div>
+            {category} - {total}
+          </div>
+        ))}
         {lists.map(([categoryName, categories]) => (
           <Accordion key={categoryName}>
             <AccordionSummary expandIcon={<ExpandMoreIcon />}>
               <div>{categoryName} </div>
               <SelectedCount selected={selectedSet} categories={categories} />
             </AccordionSummary>
+
             <AccordionDetails>
               <div className="chip-list">
                 {categories.map(c => (
@@ -52,7 +92,20 @@ export default function BackBarPage() {
                     className="chip"
                     variant={selectedSet.has(c) ? 'default' : 'outlined'}
                     color="primary"
-                    label={c}
+                    label={
+                      <>
+                        {c} ({getCategoryCounts()[c]}){' '}
+                        {!!incrementalCounts[c] && (
+                          <span
+                            className={`incremental-count ${
+                              selectedSet.has(c) ? 'to-remove' : 'to-add'
+                            }`}
+                          >
+                            ({incrementalCounts[c]})
+                          </span>
+                        )}
+                      </>
+                    }
                     onClick={() => setCategory(c)}
                     onDelete={
                       selectedSet.has(c) ? () => deleteCategory(c) : undefined
