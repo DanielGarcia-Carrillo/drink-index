@@ -1083,7 +1083,7 @@
     "rumCategory": null,
     "id": 158,
     "name": "Coconut Milk",
-    "category": "Coconut Milk"
+    "category": "Milk (Coconut)"
   },
   {
     "isInfusion": false,
@@ -1685,7 +1685,7 @@
     "rumCategory": null,
     "id": 245,
     "name": "Giffard Banane Du Brésil Banana Liqueur",
-    "category": "Banana Liqueur"
+    "category": "Liqueur (Banana)"
   },
   {
     "isInfusion": false,
@@ -1937,7 +1937,7 @@
     "rumCategory": null,
     "id": 282,
     "name": "Hellfire Tincture",
-    "category": "Hellfire Tincture"
+    "category": "Bitters (Hellfire Tincture)"
   },
   {
     "isInfusion": false,

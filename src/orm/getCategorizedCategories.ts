@@ -9,16 +9,18 @@ function setDifference(a: string[], b: string[]) {
 const CATEGORY_REGEX = {
   Agave: /^Agave/,
   Gin: /^Gin/,
-  Rum: /^Rum/,
+  Rum: /^(?:Rum|Cachaça)/,
   Whiskey: /^Whiske?y/,
   'Other Liquor': /^(?:Vodka|Absinthe|Brandy)/,
   Wine: /^(?:Wine|Vermouth|Sherry|Port|Madeira)/,
-  Bitters: /^Bitters/,
-  Fruit: /^Fruit/,
-  Juice: /^Juice/,
+  'Beer / Cider': /^(?:Beer|Cider)/,
   Liqueur: /^(?:Liqueur|Amaro|Aperitif|Cordial)/,
+  Bitters: /^Bitters/,
+  'Fruit / Vegetable': /^(?:Fruit|Puree|Leaf|Twist|Vegetable)/,
+  Juice: /^Juice/,
   Spices: /^Spice/,
-  'Syrups / Sweeteners': /^(?:Syrup|Sugar)/,
+  'Syrups / Sweeteners': /^(?:Syrup|Sugar|Molasses)/,
+  'Dairy / Mylk': /^(?:Butter|Cream|Milk)/,
   Misc: /.*?/,
 };
 
