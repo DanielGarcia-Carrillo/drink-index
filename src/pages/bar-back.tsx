@@ -78,7 +78,10 @@ export default function BackBarPage() {
           </div>
         ))}
         {lists.map(([categoryName, categories]) => (
-          <Accordion key={categoryName}>
+          <Accordion
+            key={categoryName}
+            TransitionProps={{ unmountOnExit: true }}
+          >
             <AccordionSummary expandIcon={<ExpandMoreIcon />}>
               <div>{categoryName} </div>
               <SelectedCount selected={selectedSet} categories={categories} />
