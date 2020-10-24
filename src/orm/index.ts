@@ -150,8 +150,12 @@ export function getAvailableSpecsAnnotated(
   );
 }
 
+function makeRegexSafe(str: string): string {
+  return str.replace(/[^a-z0-9 ]/gi, '\\$&');
+}
+
 export function filterSpecs(specs: FormattedSpec[], keywords: string[]) {
-  const keywordRegex = keywords.map(k => new RegExp(k, 'i'));
+  const keywordRegex = keywords.map(k => new RegExp(makeRegexSafe(k), 'i'));
   return specs.filter(spec => {
     const specString = JSON.stringify([
       spec.name,
