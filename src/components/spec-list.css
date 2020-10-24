@@ -5,11 +5,6 @@
   row-gap: 16px;
 }
 
-.spec {
-  content-visibility: auto;
-  contain-intrinsic-size: 240px;
-}
-
 .spec .origin {
   color: #555;
 }

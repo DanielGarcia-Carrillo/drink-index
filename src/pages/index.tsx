@@ -22,23 +22,12 @@ interface SpecState {
 export default function IndexPage() {
   const { selectedCategories } = useBarInventory();
   const [keywords, setKeywords] = useState<string[]>([]);
-  const [sort, setSortOrder] = useState<SortOrder>(SortOrder.Alphabetical);
+  const [sort, setSortOrder] = useState<SortOrder>(SortOrder.MissingCount);
 
-  const [{ available, filtered }, setSpecs] = useState<SpecState>({
-    available: [],
+  const [{ available, filtered }, setSpecs] = useState<SpecState>(() => ({
+    available: getAllSpecsAnnotated(selectedCategories),
     filtered: [],
-  });
-
-  useEffect(() => {
-    const specs = getAvailableSpecsAnnotated(
-      selectedCategories,
-      Inclusion.Default
-    );
-    setSpecs({
-      available: specs,
-      filtered: specs,
-    });
-  }, [selectedCategories]);
+  }));
 
   const handleFilterChange = useCallback(
     (selected: string[], inclusion: Inclusion) => {
@@ -66,6 +55,10 @@ export default function IndexPage() {
   );
 
   const sortedSpecs = useMemo(() => {
+    if (keywords.length === 0) {
+      return [];
+    }
+
     return [...filtered].sort((a, b) => {
       if (sort === SortOrder.PageNumber) {
         return Number(a.pageNum) - Number(b.pageNum);
@@ -76,11 +69,14 @@ export default function IndexPage() {
           b.ingredients.filter(i => i.missing).length
         );
       }
+      if (sort === SortOrder.TotalIngredients) {
+        return a.ingredients.length - b.ingredients.length;
+      }
       return a.name
         .toLocaleLowerCase()
         .localeCompare(b.name.toLocaleLowerCase());
     });
-  }, [filtered, sort]);
+  }, [filtered, sort, keywords]);
 
   return (
     <Layout>
@@ -94,6 +90,7 @@ export default function IndexPage() {
           keywords={keywords}
           selectedCategories={selectedCategories}
           sort={sort}
+          totalResults={keywords.length ? sortedSpecs.length : undefined}
         />
 
         <SpecList specs={sortedSpecs} />

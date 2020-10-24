@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
@@ -40,7 +40,6 @@ export default function SpecList({ specs }: Props) {
 
   return (
     <>
-      <h3>{specs.length} specs available</h3>
       <div id="specs">
         {specs.slice(0, maxToRender).map(spec => (
           <Spec key={getSpecId(spec)} spec={spec} />

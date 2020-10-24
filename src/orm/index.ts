@@ -115,7 +115,7 @@ function getAnnotatedIngredients(
 
 function getAnnotatedSpecs(
   selectedCategories: string[],
-  ingredientPredicate: (i: AnnotatedIngredient[]) => boolean
+  ingredientFilter: (i: AnnotatedIngredient[]) => boolean
 ): FormattedSpec[] {
   const annotatedIngredientMap = getAnnotatedIngredients(selectedCategories);
 
@@ -126,7 +126,7 @@ function getAnnotatedSpecs(
         getIngredient(i.ingredientId, annotatedIngredientMap)
       ),
     }))
-    .filter(s => ingredientPredicate(s.ingredients))
+    .filter(s => ingredientFilter(s.ingredients))
     .sort(({ name: a }, { name: b }) => a.localeCompare(b));
 }
 

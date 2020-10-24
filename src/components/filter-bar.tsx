@@ -20,6 +20,7 @@ export enum SortOrder {
   Alphabetical,
   MissingCount,
   PageNumber,
+  TotalIngredients,
 }
 
 interface Props {
@@ -29,6 +30,7 @@ interface Props {
   keywords: string[];
   selectedCategories: string[];
   sort: SortOrder | undefined;
+  totalResults: number | undefined;
 }
 
 function inclusionFromToggle(
@@ -47,11 +49,12 @@ export default function Filterbar({
   onSearch,
   onKeywordSearch,
   onSort,
+  totalResults,
   selectedCategories,
   sort = SortOrder.Alphabetical,
 }: Props) {
   const [includeEasy, setEasy] = useState(false);
-  const [includeBarOnly, setBarOnly] = useState(true);
+  const [includeBarOnly, setBarOnly] = useState(false);
 
   const handleToggle = useCallback(
     ({ target: { checked } }: React.ChangeEvent<HTMLInputElement>) => {
@@ -76,6 +79,7 @@ export default function Filterbar({
 
   const handleKeywordSearch = useCallback(
     (newKeywords: string[]) => {
+      debugger;
       onKeywordSearch(
         newKeywords,
         inclusionFromToggle(includeEasy, includeBarOnly)
@@ -93,20 +97,26 @@ export default function Filterbar({
 
   return (
     <div id="filter-bar">
-      <KeywordSearch keywords={keywords} onSearch={handleKeywordSearch} />
+      <div className="results-header">
+        <KeywordSearch keywords={keywords} onSearch={handleKeywordSearch} />
 
-      <FormControl variant="outlined" className="sort-menu">
-        <InputLabel htmlFor="sort-menu-select">Sort Order</InputLabel>
-        <Select id="sort-menu-select" value={sort} onChange={handleSort}>
-          <MenuItem value={SortOrder.Alphabetical}>Alphabetical</MenuItem>
-          <MenuItem value={SortOrder.MissingCount}>
-            # Missing Ingredients
-          </MenuItem>
-          <MenuItem value={SortOrder.PageNumber}>Page number</MenuItem>
-        </Select>
-      </FormControl>
+        <FormControl variant="outlined" className="sort-menu">
+          <InputLabel htmlFor="sort-menu-select">Sort Order</InputLabel>
+          <Select id="sort-menu-select" value={sort} onChange={handleSort}>
+            <MenuItem value={SortOrder.Alphabetical}>Alphabetical</MenuItem>
+            <MenuItem value={SortOrder.MissingCount}>
+              # Missing Ingredients
+            </MenuItem>
+            <MenuItem value={SortOrder.PageNumber}>Page number</MenuItem>
+            <MenuItem value={SortOrder.TotalIngredients}>
+              Total Ingredients
+            </MenuItem>
+          </Select>
+        </FormControl>
+      </div>
 
-      <FormControlLabel
+      {Number.isInteger(totalResults) && <h3>{totalResults} matching specs</h3>}
+      {/* <FormControlLabel
         control={<Switch defaultChecked onChange={handleToggle} />}
         label="Limit to back bar ingredients"
       />
@@ -120,7 +130,7 @@ export default function Filterbar({
             onChange={handleEasyToggle}
           />
         }
-      />
+      /> */}
     </div>
   );
 }

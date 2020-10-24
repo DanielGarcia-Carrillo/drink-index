@@ -1,5 +1,5 @@
 body {
-  --max-content-width: 80rem;
+  --max-content-width: 70rem;
   --content-padding: 1rem;
 }
 
@@ -11,7 +11,7 @@ main {
 header {
   position: sticky;
   top: 0;
-  z-index: 1;
+  z-index: 5;
   background: #202020;
 }
 
