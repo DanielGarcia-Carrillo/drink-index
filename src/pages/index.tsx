@@ -24,10 +24,17 @@ export default function IndexPage() {
   const [keywords, setKeywords] = useState<string[]>([]);
   const [sort, setSortOrder] = useState<SortOrder>(SortOrder.MissingCount);
 
-  const [{ available, filtered }, setSpecs] = useState<SpecState>(() => ({
-    available: getAllSpecsAnnotated(selectedCategories),
+  const [{ available, filtered }, setSpecs] = useState<SpecState>({
+    available: [],
     filtered: [],
-  }));
+  });
+
+  useEffect(() => {
+    setSpecs({
+      available: getAllSpecsAnnotated(selectedCategories),
+      filtered: [],
+    });
+  }, [selectedCategories]);
 
   const handleFilterChange = useCallback(
     (selected: string[], inclusion: Inclusion) => {
