@@ -3218,13 +3218,16 @@
     "pageNum": "140",
     "ingredients": [
       {
-        "ingredientId": 220
+        "ingredientId": 220,
+        "amount": "1.5 oz"
       },
       {
-        "ingredientId": 296
+        "ingredientId": 296,
+        "amount": "¾ oz"
       },
       {
-        "ingredientId": 119
+        "ingredientId": 119,
+        "amount": "¾ oz"
       }
     ],
     "instructions": "GARNISH: 1 LEMON TWIST Stir all the ingredients over ice, then strain into a coupe. Garnish with the lemon twist.",
@@ -3413,13 +3416,16 @@
     "pageNum": "141",
     "ingredients": [
       {
-        "ingredientId": 230
+        "ingredientId": 230,
+        "amount": "2 oz"
       },
       {
-        "ingredientId": 337
+        "ingredientId": 337,
+        "amount": "1 oz"
       },
       {
-        "ingredientId": 125
+        "ingredientId": 125,
+        "amount": "½ oz"
       }
     ],
     "instructions": "GARNISH: 1 LIME WEDGE Shake all the ingredients with ice, then strain into a coupe. Garnish with the lime wedge.",
@@ -3788,13 +3794,16 @@
     "pageNum": "145",
     "ingredients": [
       {
-        "ingredientId": 459
+        "ingredientId": 459,
+        "amount": "2 oz"
       },
       {
-        "ingredientId": 296
+        "ingredientId": 296,
+        "amount": "¾ oz"
       },
       {
-        "ingredientId": 28
+        "ingredientId": 28,
+        "amount": "2 dashes"
       }
     ],
     "instructions": "GARNISH: 1 BRANDIED CHERRY Stir all the ingredients over ice, then strain into a coupe. Garnish with the cherry.",
